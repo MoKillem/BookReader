@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Read Cycles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pagesgoal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @read_cycles.each do |read_cycle| %>
+      <tr>
+        <td><%= read_cycle.pagesGoal %></td>
+        <td><%= link_to 'Show', read_cycle %></td>
+        <td><%= link_to 'Edit', edit_read_cycle_path(read_cycle) %></td>
+        <td><%= link_to 'Destroy', read_cycle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Read Cycle', new_read_cycle_path %>
