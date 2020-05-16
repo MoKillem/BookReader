@@ -1,6 +1,43 @@
 <h1>Editing Book</h1>
 
-<%= render 'form', book: @book %>
+<%= form_for [current_user, @book] do |form| %>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
 
-<%= link_to 'Show', @book %> |
-<%= link_to 'Back', books_path %>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <p>Name of book</p>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <p>Author of book</p>
+    <%= form.text_field :author %>
+  </div>
+
+  <div class="field">
+    <p>Number of pages in book</p>
+    <%= form.text_field :pages %>
+  </div>
+
+  <div class="field">
+    <p>Review of book</p>
+    <%= form.text_area :review %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Show', user_book_path(@book) %> |
+<%= link_to 'Back', user_books_path %>
