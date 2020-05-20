@@ -6,6 +6,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = current_user.books.all
+    @book_ranks = current_user.books.where(readBook: true)
   end
 
   # GET /books/1
@@ -20,6 +21,22 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+  end
+
+  def update_read
+    @book =  Book.find(params[:book_id])
+    if @book.update(book_params)
+      @books = current_user.books.all
+      if params[:book][:readBook] == "1"
+        redirect_to user_books_path, flash: {notice: "#{@book.name} by #{@book.author} was successfully read."} 
+      else
+        redirect_to user_books_path, flash: {notice: "#{@book.name} by #{@book.author} was successfully changed to unread."} 
+      end
+    else
+      @books = current_user.books.all
+      redirect_to user_books_path, flash: {notice: "#{@book.name} by #{@book.author} was not successfully read."} 
+
+    end
   end
 
   # POST /books
@@ -62,6 +79,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:pages, :name, :review, :author)
+      params.require(:book).permit(:pages, :name, :review, :author, :readBook)
     end
 end

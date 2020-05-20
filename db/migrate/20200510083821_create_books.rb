@@ -5,6 +5,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :review
       t.string :author
+      t.boolean :readBook, default: false
       
       t.belongs_to :user
 

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   resource :user do 
-    resources :books
+    resources :books do 
+      patch 'read' => 'books#update_read'
+    end
     resources :read_cycles
   end
   root 'books#index'

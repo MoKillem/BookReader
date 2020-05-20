@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_05_10_085221) do
     t.string "name"
     t.string "review"
     t.string "author"
+    t.boolean "readBook", default: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

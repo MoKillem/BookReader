@@ -1,6 +1,8 @@
 
 <h1>Books</h1>
 
+<p style="color:orange">You've read <%= @book_ranks.length%> books </p>
+
 <table>
   <thead>
     <tr>
@@ -19,6 +21,11 @@
         <td><%= book.name %></td>
         <td><%= book.review %></td>
         <td><%= book.author %></td>
+        <td>
+        <%= form_with(model: [current_user,book], url: user_book_read_path(book), method:'patch', class: "form-check-submit") do |form|%>
+        <%= form.check_box :readBook, class: "check-box"%>
+        <%end%>
+        </td>
         <td><%= link_to 'Show', user_book_path(book) %></td>
         <td><%= link_to 'Edit', edit_user_book_path(book) %></td>
         <td><%= link_to 'Destroy', user_book_path(book), method: :delete, data: { confirm: 'Are you sure?' } %></td>

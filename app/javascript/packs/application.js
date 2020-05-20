@@ -15,3 +15,17 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+window.onload = (event) => {
+    // all the cheboxes and forms
+    var check = document.getElementsByClassName('check-box') 
+    var form =  document.getElementsByClassName('form-check-submit')
+
+    for(let i =0; i < check.length; i++){
+        check[i].addEventListener("change", function() {
+            form[i].submit()
+        });
+    }
+
+
+  };
