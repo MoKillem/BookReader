@@ -3,10 +3,12 @@ Rails.application.routes.draw do
   resource :user do 
     resources :books do 
       patch 'read' => 'books#update_read'
+      patch 'currentRead' => 'books#current_read'
     end
     resources :read_cycles
   end
   get 'leaderboard' => 'leader#index'
+  resources :usera
   root 'books#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

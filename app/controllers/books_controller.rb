@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show,:edit,:destroy]
+  before_action :set_book_by_id, only: [:update_read, :current_read]
   before_action :authenticate_user!
 
   # GET /books
@@ -24,7 +25,6 @@ class BooksController < ApplicationController
   end
 
   def update_read
-    @book =  Book.find(params[:book_id])
     if @book.update(book_params)
       @books = current_user.books.all
       if params[:book][:readBook] == "1"
@@ -71,14 +71,29 @@ class BooksController < ApplicationController
     redirect_to user_books_path,flash: {notice: "#{@book.name}  by #{@book.author} was successfully deleted."} 
   end
 
+  def current_read
+    @previous_book = current_user.books.where(current_book: true)[0]
+    if @previous_book
+      @previous_book.current_book = false
+      @previous_book.save
+    end
+    if @book.update(book_params)
+      @books = current_user.books.all
+      redirect_to user_books_path, flash: {notice: "#{@book.name}  by #{@book.author} is being currently read by you."} 
+    else
+      render :current_read
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
     end
-
+    def set_book_by_id
+      @book =Book.find(params[:book_id])
+    end 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:pages, :name, :review, :author, :readBook)
+      params.require(:book).permit(:pages, :name, :review, :author, :readBook, :current_book)
     end
 end

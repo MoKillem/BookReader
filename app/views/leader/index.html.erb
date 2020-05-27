@@ -8,6 +8,7 @@
       <th>Position</th>
       <th>Email</th>
       <th>Book read</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -17,11 +18,12 @@
         <td><%= @ranking.find_index(rank) + 1 %></td>
         <td><%= rank[0].email %></td>
         <td> <%= rank[1] %> </td>
+        <td><%= link_to 'See Profile', usera_path(rank[0].id) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'back', user_books_path %>
+<%= link_to 'Back', user_books_path %>
 <br>
 

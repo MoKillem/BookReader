@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pages:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+ <% if @current_book %>
+  <strong>Currently Reading:</strong>
+  <table>
+  <tr>
+        <td><%= @current_book.author %></td>
+        <td><%= @current_book.name %></td>
+        <td> <%= @current_book.pages %></td>
+        <td><%= @current_book.name %></td>
+        </tr>
+  </table>
+        <%end%>
+
+<p>
+  <strong>Read:</strong>
+  <%= @user.books.where(readBook: true).count %>
+</p>
+
+<p>
+  <strong>Books he's read:</strong>
+  <table>
+  <% @user.books.where(readBook: true).each do |book|%>
+  <tr>
+        <td><%= book.pages %></td>
+        <td><%= book.name %></td>
+        <td><%= book.review %></td>
+        <td><%= book.author %></td>
+        <td>
+        <%= form_with(model: [current_user,book], url: user_book_read_path(book), method:'patch', class: "form-check-submit") do |form|%>
+        <%= form.check_box :readBook, class: "check-box"%>
+        <%end%>
+        </td>
+        <td><%= link_to 'Show', user_book_path(book) %></td>
+        <td><%= link_to 'Edit', edit_user_book_path(book) %></td>
+        <td><%= link_to 'Destroy', user_book_path(book), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </table>
+</p>
+
+
+
+<%= link_to 'Leaderboard', leaderboard_path(@book) %> |
+<%= link_to 'My Profile', user_books_path %>
