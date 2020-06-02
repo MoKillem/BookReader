@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<strong>ProfilePage</strong>
+
+<strong>Email</strong>
+<div>
+<%=@user.email%>
+</div>
+
+<strong>How many books s/he's read</strong>
+
+<div>
+<%=@user.books.where(readBook: true).count%>
+</div>
+
+<strong> books s/he's read</strong>
+
+<div>
+<table>
+
+ <tbody>
+    <% @user.books.where(readBook:true).each do |book| %>
+      <tr>
+        <td><%= book.pages %></td>
+        <td><%= book.name %></td>
+        <td><%= book.review %></td>
+        <td><%= book.author %></td>
+        <td>
+        </td>
+          </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<%=link_to 'leaderboard', leaderboard_path%>

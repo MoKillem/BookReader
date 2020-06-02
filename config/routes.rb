@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   end
   get 'leaderboard' => 'leader#index'
   root 'books#index'
+  resources :usera
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
