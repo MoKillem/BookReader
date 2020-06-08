@@ -6,6 +6,24 @@
 <div>
 <%=@user.email%>
 </div>
+<p>
+<% if @current_book %>
+  <strong>Currently Reading</strong>
+  <table>
+ <tbody>
+      <tr>
+        <td><%= @current_book.pages %></td>
+        <td><%= @current_book.name %></td>
+        <td><%= @current_book.review %></td>
+        <td><%= @current_book.author %></td>
+        <td>
+        </td>
+          </tr>
+  </tbody>
+</table>
+<%end%>
+
+</p>
 
 <strong>How many books s/he's read</strong>
 

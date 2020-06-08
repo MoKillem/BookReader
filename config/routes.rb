@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resource :user do 
     resources :books do 
       patch 'read' => 'books#update_read'
+      patch 'currentRead' => 'books#current_read'
     end
     resources :read_cycles
   end

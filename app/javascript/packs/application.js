@@ -20,12 +20,16 @@ window.onload = (event) => {
     // all the cheboxes and forms
     var check = document.getElementsByClassName('check-box') 
     var form =  document.getElementsByClassName('form-check-submit')
-
+    var check_reading = document.getElementsByClassName('currentreadcheck') 
+    var form_reading = document.getElementsByClassName('currentreadform') 
     for(let i =0; i < check.length; i++){
         check[i].addEventListener("change", function() {
             form[i].submit()
         });
     }
-
-
+    for(let i =0; i < check_reading.length; i++){
+        check_reading[i].addEventListener("change", function() {
+            form_reading[i].submit()
+        });
+    }
   };
